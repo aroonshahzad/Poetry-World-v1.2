@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>🔥 Heartfelt Vault — Poetry for the Real</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(145deg, #1a1a1e 0%, #0c0c0f 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        /* iOS Style Lock Screen - refined */
+        .lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.72);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .ios-dialog {
+            background: rgba(28, 28, 32, 0.92);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 28px;
+            width: 86%;
+            max-width: 340px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 0.5px solid rgba(255, 255, 255, 0.2);
+            animation: slideUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .ios-dialog-header {
+            padding: 28px 20px 20px;
+            text-align: center;
+        }
+
+        .ios-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff3b30, #d70015);
+            border-radius: 22px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            box-shadow: 0 12px 20px rgba(215, 0, 21, 0.4);
+        }
+
+        .ios-title {
+            font-size: 21px;
+            font-weight: 620;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .ios-message {
+            font-size: 15px;
+            color: #b0b0b6;
+            line-height: 1.4;
+            padding: 0 8px;
+        }
+
+        .ios-divider {
+            height: 0.5px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .ios-buttons {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ios-button {
+            padding: 18px 20px;
+            border: none;
+            background: none;
+            font-size: 17px;
+            cursor: pointer;
+            font-weight: 590;
+            color: #ff5e5e;
+            transition: 0.2s;
+        }
+
+        .ios-button:active {
+            background: rgba(255, 94, 94, 0.15);
+            transform: scale(0.98);
+        }
+
+        .ios-button + .ios-button {
+            border-top: 0.5px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Password Screen - modern dark */
+        .password-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+        }
+
+        .password-screen.active {
+            display: flex;
+        }
+
+        .password-dialog {
+            background: rgba(24, 24, 28, 0.96);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            width: 88%;
+            max-width: 360px;
+            overflow: hidden;
+            border: 0.5px solid rgba(255, 255, 255, 0.15);
+            animation: slideUp 0.45s cubic-bezier(0.2, 0.9, 0.4, 1);
+        }
+
+        .password-header {
+            padding: 24px 20px 12px;
+            text-align: center;
+        }
+
+        .password-title {
+            font-size: 20px;
+            font-weight: 620;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .password-subtitle {
+            font-size: 14px;
+            color: #a1a1a6;
+        }
+
+        .password-input-container {
+            padding: 8px 24px 28px;
+        }
+
+        .password-field-wrapper {
+            position: relative;
+            margin-bottom: 22px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 16px 50px 16px 18px;
+            border: 1.5px solid #2c2c2e;
+            border-radius: 18px;
+            font-size: 17px;
+            background: #1c1c1e;
+            color: white;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #ff5e5e;
+            background: #26262a;
+            box-shadow: 0 0 0 4px rgba(255, 94, 94, 0.2);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: #8e8e93;
+        }
+
+        .error-message {
+            color: #ff453a;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: #ff3b30;
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.97);
+            background: #d70015;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 16px;
+            color: #ff5e5e;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 100%;
+        }
+
+        /* Success / welcome */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(32px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 10000;
+        }
+
+        .success-overlay.active {
+            display: flex;
+        }
+
+        .success-check {
+            width: 80px;
+            height: 80px;
+            background: #ff3b30;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(255, 59, 48, 0.5);
+        }
+
+        .success-check svg {
+            width: 44px;
+            height: 44px;
+            stroke: white;
+            stroke-width: 4;
+            fill: none;
+        }
+
+        .success-text {
+            font-size: 22px;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* Denied overlay */
+        .denied-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(28px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .denied-overlay.active {
+            display: flex;
+        }
+
+        .denied-dialog {
+            background: rgba(28, 28, 32, 0.96);
+            border-radius: 36px;
+            padding: 32px 24px;
+            text-align: center;
+            max-width: 300px;
+            border: 0.5px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .denied-icon { font-size: 56px; margin-bottom: 12px; }
+        .denied-title { font-size: 22px; font-weight: 620; color: white; margin-bottom: 8px; }
+        .denied-message { font-size: 15px; color: #aaa; margin-bottom: 24px; }
+        .denied-button {
+            background: #ff3b30;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+
+        /* MAIN APP - charcoal & red theme */
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            background: #0f0f12;
+            border-radius: 44px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            display: none;
+            overflow: hidden;
+            backdrop-filter: blur(0px);
+        }
+
+        .container.active {
+            display: flex;
+            flex-direction: column;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* Sidebar - charcoal deep */
+        .sidebar {
+            background: #121215;
+            padding: 28px 20px;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #2a2a2e;
+        }
+
+        .sidebar h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar .subtitle {
+            font-size: 13px;
+            color: #8e8e93;
+            margin-bottom: 24px;
+        }
+
+        .genre-stats {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: #1c1c1f;
+            backdrop-filter: blur(4px);
+            border-radius: 24px;
+            padding: 12px 20px;
+            flex: 1;
+            min-width: 100px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #2c2c30;
+        }
+
+        .stat-card.active {
+            background: #ff3b30;
+            border-color: #ff3b30;
+            transform: scale(0.98);
+        }
+
+        .stat-card .stat-icon { font-size: 26px; margin-bottom: 6px; }
+        .stat-card .stat-label { font-size: 13px; font-weight: 500; color: #ddd; }
+        .stat-card .stat-count { font-size: 28px; font-weight: 800; color: white; line-height: 1.2; }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .nav-btn {
+            background: #1f1f23;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 44px;
+            font-weight: 500;
+            font-size: 13px;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .nav-btn:active { background: #2c2c30; transform: scale(0.96); }
+
+        /* Main content area */
+        .main-content {
+            flex: 1;
+            background: #0a0a0c;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: #111114;
+            padding: 20px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-bottom: 1px solid #252529;
+        }
+
+        .header h2 {
+            color: #ff5e5e;
+            font-size: 22px;
+            font-weight: 680;
+        }
+
+        .add-btn {
+            background: #ff3b30;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            gap: 6px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            box-shadow: 0 5px 12px rgba(255, 59, 48, 0.3);
+            cursor: pointer;
+        }
+
+        .add-btn:active { transform: scale(0.97); background: #d70015; }
+
+        .content-area {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 18px;
+            max-height: 65vh;
+            overflow-y: auto;
+        }
+
+        /* Poetry Cards - romantic hot red / desperation charcoal */
+        .poetry-card {
+            background: #141416;
+            border-radius: 28px;
+            padding: 22px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 6px solid;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .poetry-card.romantic {
+            border-left-color: #ff3b30;
+            background: linear-gradient(145deg, #18181c, #111114);
+        }
+
+        .poetry-card.desperation {
+            border-left-color: #4a4a4e;
+            background: #151518;
+        }
+
+        .poetry-card:hover { transform: translateY(-4px); }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .genre-badge {
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .genre-badge.romantic {
+            background: #ff3b30;
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 59, 48, 0.4);
+        }
+
+        .genre-badge.desperation {
+            background: #2c2c30;
+            color: #e4e4e6;
+            border: 0.5px solid #4a4a4e;
+        }
+
+        .poetry-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .poetry-text {
+            color: #c7c7cc;
+            line-height: 1.55;
+            font-size: 14px;
+            white-space: pre-wrap;
+            max-height: 130px;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .poetry-text.expanded { max-height: 800px; }
+
+        .read-more {
+            color: #ff5e5e;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 10px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .card-actions {
+            margin-top: 18px;
+            display: flex;
+            gap: 12px;
+            border-top: 1px solid #2a2a2e;
+            padding-top: 16px;
+        }
+
+        .action-btn {
+            background: #242428;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 36px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .edit-btn { color: #ff9f9a; background: #2c1e1e; }
+        .delete-btn { color: #ff6b6b; background: #2a1c1c; }
+        .action-btn:active { opacity: 0.7; transform: scale(0.96); }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #8e8e93;
+            grid-column: 1 / -1;
+        }
+
+        /* Modal - glassy */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: #1c1c1f;
+            border-radius: 40px;
+            padding: 28px;
+            width: 92%;
+            max-width: 520px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 0.5px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-content h2 { color: #ff5e5e; margin-bottom: 20px; font-size: 26px; }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label { color: #ddd; font-weight: 600; margin-bottom: 6px; display: block; }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            background: #2c2c30;
+            border: 1px solid #3a3a40;
+            border-radius: 22px;
+            color: white;
+            font-size: 15px;
+        }
+
+        .genre-selector {
+            display: flex;
+            gap: 14px;
+        }
+
+        .genre-option {
+            flex: 1;
+            padding: 14px;
+            background: #2c2c30;
+            border-radius: 40px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .genre-option.selected {
+            background: #ff3b30;
+            color: white;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 28px;
+        }
+
+        .btn {
+            padding: 12px 26px;
+            border-radius: 44px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary { background: #ff3b30; color: white; }
+        .btn-secondary { background: #2c2c30; color: #ddd; }
+
+        /* mobile fine-tuning */
+        @media (max-width: 680px) {
+            body { padding: 8px; }
+            .sidebar { padding: 20px; }
+            .genre-stats { gap: 8px; }
+            .stat-card { padding: 10px 12px; min-width: 70px; }
+            .stat-card .stat-count { font-size: 22px; }
+            .header h2 { font-size: 18px; }
+            .add-btn { padding: 10px 16px; font-size: 13px; }
+            .content-area { padding: 14px; gap: 14px; grid-template-columns: 1fr; }
+            .modal-content { padding: 20px; width: 95%; }
+        }
+
+        /* scrollbar */
+        .content-area::-webkit-scrollbar { width: 5px; }
+        .content-area::-webkit-scrollbar-track { background: #1c1c1f; border-radius: 10px; }
+        .content-area::-webkit-scrollbar-thumb { background: #ff5e5e; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- Lock Screen -->
+    <div class="lock-screen" id="lockScreen">
+        <div class="ios-dialog">
+            <div class="ios-dialog-header">
+                <div class="ios-icon">❤️‍🔥</div>
+                <div class="ios-title">Do you truly love someone?</div>
+                <div class="ios-message">This vault is for raw feelings & real poetry</div>
+            </div>
+            <div class="ios-divider"></div>
+            <div class="ios-buttons">
+                <button class="ios-button" onclick="handleYes()">Yes, I do</button>
+                <div class="ios-divider"></div>
+                <button class="ios-button" onclick="handleNo()">Not yet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password -->
+    <div class="password-screen" id="passwordScreen">
+        <div class="password-dialog">
+            <div class="password-header">
+                <div class="ios-icon" style="width: 55px; height: 55px; font-size: 28px;">🔐</div>
+                <div class="password-title">Passkey required</div>
+                <div class="password-subtitle">Enter the special word</div>
+            </div>
+            <div class="password-input-container">
+                <div class="password-field-wrapper">
+                    <input type="password" class="password-input" id="passwordInput" placeholder="*******" autocomplete="off">
+                    <button class="toggle-password" onclick="togglePasswordVisibility()">👁️</button>
+                </div>
+                <div class="error-message" id="errorMessage">Wrong key — try again</div>
+                <button class="submit-btn" onclick="verifyPassword()">Unlock ❤️</button>
+                <button class="back-link" onclick="goBackToQuestion()">← Back</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-check"><svg viewBox="0 0 24 24"><polyline points="4,12 10,18 20,6" stroke-dasharray="50" stroke-dashoffset="50"></polyline></svg></div>
+        <div class="success-text">Welcome, poet ❤️</div>
+    </div>
+
+    <div class="denied-overlay" id="deniedOverlay">
+        <div class="denied-dialog">
+            <div class="denied-icon">💔</div>
+            <div class="denied-title">Access denied</div>
+            <div class="denied-message">This space is reserved for those who carry real emotions.</div>
+            <button class="denied-button" onclick="goBack()">Return</button>
+        </div>
+    </div>
+
+    <div class="container" id="mainApp">
+        <div class="sidebar">
+            <h1>📖 Heartfelt Vault</h1>
+            <p class="subtitle">where emotions echo</p>
+            <div class="genre-stats">
+                <div class="stat-card active" onclick="filterPoetries('all', this)">
+                    <div class="stat-icon">📜</div>
+                    <div class="stat-label">All poems</div>
+                    <div class="stat-count" id="totalCount">0</div>
+                </div>
+                <div class="stat-card" onclick="filterPoetries('romantic', this)">
+                    <div class="stat-icon">❤️‍🔥</div>
+                    <div class="stat-label">Romantic</div>
+                    <div class="stat-count" id="romanticCount">0</div>
+                </div>
+                <div class="stat-card" onclick="filterPoetries('desperation', this)">
+                    <div class="stat-icon">🖤</div>
+                    <div class="stat-label">Desperation</div>
+                    <div class="stat-count" id="desperationCount">0</div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="exportData()">📎 Export</button>
+                <button class="nav-btn" onclick="importData()">📂 Import</button>
+                <button class="nav-btn" onclick="clearAll()">🗑️ Clear all</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <h2 id="headerTitle">All poetries</h2>
+                <button class="add-btn" onclick="openModal()">✨ New poem</button>
+            </div>
+            <div class="content-area" id="contentArea"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="poetryModal">
+        <div class="modal-content">
+            <h2 id="modalTitle">✍️ Write</h2>
+            <form id="poetryForm">
+                <div class="form-group"><label>📌 Title</label><input type="text" id="title" placeholder="e.g., Midnight whisper" required></div>
+                <div class="form-group"><label>🎭 Vibe</label>
+                    <div class="genre-selector">
+                        <div class="genre-option selected" data-genre="romantic" onclick="selectGenre('romantic')">❤️ Romantic</div>
+                        <div class="genre-option" data-genre="desperation" onclick="selectGenre('desperation')">🖤 Desperation</div>
+                    </div>
+                    <input type="hidden" id="genre" value="romantic">
+                </div>
+                <div class="form-group"><label>🌙 Your poetry</label><textarea id="content" rows="5" placeholder="Let your words bleed..." required></textarea></div>
+                <input type="hidden" id="editId">
+                <div class="modal-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button><button type="submit" class="btn btn-primary">💾 Save</button></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const CORRECT_PASSWORD = 'Starboy';
+        let currentFilter = 'all';
+        let activeStatElem = null;
+
+        // --- auth UI ---
+        function handleYes() { document.getElementById('lockScreen').style.display = 'none'; document.getElementById('passwordScreen').classList.add('active'); setTimeout(()=>document.getElementById('passwordInput').focus(),200); }
+        function handleNo() { document.getElementById('lockScreen').style.display = 'none'; document.getElementById('deniedOverlay').classList.add('active'); }
+        function goBack() { document.getElementById('deniedOverlay').classList.remove('active'); document.getElementById('lockScreen').style.display = 'flex'; }
+        function goBackToQuestion() { document.getElementById('passwordScreen').classList.remove('active'); document.getElementById('lockScreen').style.display = 'flex'; document.getElementById('passwordInput').value = ''; document.getElementById('errorMessage').classList.remove('show'); }
+        function togglePasswordVisibility() { let inp = document.getElementById('passwordInput'); let btn = event.target; if(inp.type === 'password'){ inp.type='text'; btn.textContent='🙈'; } else { inp.type='password'; btn.textContent='👁️'; } }
+        function verifyPassword() { if(document.getElementById('passwordInput').value === CORRECT_PASSWORD) showSuccess(); else showError(); }
+        document.getElementById('passwordInput').addEventListener('keypress', e => { if(e.key === 'Enter') verifyPassword(); });
+        function showSuccess() { document.getElementById('passwordScreen').classList.remove('active'); document.getElementById('successOverlay').classList.add('active'); setTimeout(()=>{ document.getElementById('successOverlay').classList.remove('active'); document.getElementById('mainApp').classList.add('active'); initApp(); },1300); }
+        function showError() { let inp=document.getElementById('passwordInput'); let err=document.getElementById('errorMessage'); inp.classList.add('error'); err.classList.add('show'); setTimeout(()=>{ inp.classList.remove('error'); inp.value=''; err.classList.remove('show'); },1500); }
+
+        // --- poetry storage (genre: romantic / desperation) ---
+        class PoetryVault {
+            constructor(){ this.key='poetry_bank'; this.init(); }
+            init(){ if(!localStorage.getItem(this.key)) { 
+                let defaults = [
+                    { id: Date.now()+1, title: "Embers of you", content: "I carried your name in every firefly's glow.\nNow ashes remain but I still feel the heat.", genre: "romantic", date: new Date().toISOString() },
+                    { id: Date.now()+2, title: "Concrete heart", content: "The city never loved me back.\nNeither did the silence in your last text.", genre: "desperation", date: new Date().toISOString() },
+                    { id: Date.now()+3, title: "Velvet scars", content: "Romance is a wound that smells like roses.\nI’d bleed again just to hold you once.", genre: "romantic", date: new Date().toISOString() }
+                ];
+                localStorage.setItem(this.key, JSON.stringify(defaults));
+            } }
+            getAll(){ return JSON.parse(localStorage.getItem(this.key)); }
+            getByGenre(genre){ return this.getAll().filter(p=>p.genre === genre); }
+            add(p){ let all=this.getAll(); p.id=Date.now(); p.date=new Date().toISOString(); all.push(p); localStorage.setItem(this.key, JSON.stringify(all)); return p; }
+            update(id,data){ let all=this.getAll(); let idx=all.findIndex(p=>p.id===id); if(idx!==-1){ all[idx]={...all[idx], ...data, id}; localStorage.setItem(this.key,JSON.stringify(all)); return true; } return false; }
+            delete(id){ let filtered=this.getAll().filter(p=>p.id!==id); localStorage.setItem(this.key,JSON.stringify(filtered)); }
+            getStats(){ let all=this.getAll(); return { total:all.length, romantic:all.filter(p=>p.genre==='romantic').length, desperation:all.filter(p=>p.genre==='desperation').length }; }
+            clearAll(){ localStorage.setItem(this.key,JSON.stringify([])); }
+            exportData(){ return JSON.stringify(this.getAll(),null,2); }
+            importData(json){ try{ let data=JSON.parse(json); if(Array.isArray(data)){ localStorage.setItem(this.key,JSON.stringify(data)); return true; } }catch(e){} return false; }
+        }
+        const vault = new PoetryVault();
+        function initApp(){ updateStats(); displayPoetries(); }
+        function updateStats(){ let s=vault.getStats(); document.getElementById('totalCount').innerText=s.total; document.getElementById('romanticCount').innerText=s.romantic; document.getElementById('desperationCount').innerText=s.desperation; }
+        function displayPoetries(){
+            let poetries = currentFilter==='all' ? vault.getAll() : vault.getByGenre(currentFilter);
+            let area = document.getElementById('contentArea');
+            if(!poetries.length){ area.innerHTML=`<div class="empty-state"><div class="empty-icon">📖</div><h3>Empty vault</h3><p>Tap “New poem” and pour your heart.</p></div>`; return; }
+            area.innerHTML = poetries.map(p => `
+                <div class="poetry-card ${p.genre}" id="poetry-${p.id}">
+                    <div class="card-header"><span class="genre-badge ${p.genre}">${p.genre==='romantic'? '❤️ Romantic' : '🖤 Desperation'}</span><small style="color:#8e8e93">${new Date(p.date).toLocaleDateString()}</small></div>
+                    <h3>${escapeHtml(p.title)}</h3>
+                    <div class="poetry-text" id="text-${p.id}">${escapeHtml(p.content)}</div>
+                    ${p.content.length > 130 ? `<span class="read-more" onclick="toggleReadMore('${p.id}')">Read more...</span>` : ''}
+                    <div class="card-actions"><button class="action-btn edit-btn" onclick="editPoetry(${p.id})">✏️ Edit</button><button class="action-btn delete-btn" onclick="deletePoetry(${p.id})">🗑️ Delete</button></div>
+                </div>
+            `).join('');
+            document.getElementById('headerTitle').innerText = currentFilter==='all' ? 'All poetries' : (currentFilter==='romantic'? '❤️ Romantic flames' : '🖤 Desperation echoes');
+        }
+        function filterPoetries(genre, el){ currentFilter=genre; document.querySelectorAll('.stat-card').forEach(c=>c.classList.remove('active')); if(el) el.classList.add('active'); displayPoetries(); }
+        function openModal(poetry=null){ let modal=document.getElementById('poetryModal'); document.getElementById('modalTitle').innerText=poetry?'Edit poem':'New poem'; document.getElementById('title').value=poetry?.title||''; document.getElementById('content').value=poetry?.content||''; document.getElementById('genre').value=poetry?.genre||'romantic'; document.getElementById('editId').value=poetry?.id||''; selectGenre(poetry?.genre||'romantic'); modal.classList.add('active'); }
+        function closeModal(){ document.getElementById('poetryModal').classList.remove('active'); }
+        function selectGenre(g){ document.getElementById('genre').value=g; document.querySelectorAll('.genre-option').forEach(opt=>{ opt.classList.remove('selected'); if(opt.dataset.genre===g) opt.classList.add('selected'); }); }
+        document.getElementById('poetryForm').addEventListener('submit', function(e){ e.preventDefault(); let poetry={ title:document.getElementById('title').value.trim(), content:document.getElementById('content').value.trim(), genre:document.getElementById('genre').value }; let id=document.getElementById('editId').value; if(id) vault.update(parseInt(id),poetry); else vault.add(poetry); closeModal(); updateStats(); displayPoetries(); });
+        function editPoetry(id){ let p=vault.getAll().find(p=>p.id===id); if(p) openModal(p); }
+        function deletePoetry(id){ if(confirm('Permanently delete this piece?')){ vault.delete(id); updateStats(); displayPoetries(); } }
+        function toggleReadMore(id){ let txtDiv=document.getElementById(`text-${id}`); let btn=event.target; if(txtDiv.classList.contains('expanded')){ txtDiv.classList.remove('expanded'); btn.innerText='Read more...'; } else { txtDiv.classList.add('expanded'); btn.innerText='Show less'; } }
+        function exportData(){ let data=vault.exportData(); let blob=new Blob([data],{type:'application/json'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`poetry_vault_${new Date().toISOString().split('T')[0]}.json`; a.click(); URL.revokeObjectURL(a.href); }
+        function importData(){ let inp=document.createElement('input'); inp.type='file'; inp.accept='.json'; inp.onchange=e=>{ let f=e.target.files[0]; let reader=new FileReader(); reader.onload=ev=>{ if(vault.importData(ev.target.result)){ alert('Vault restored!'); updateStats(); displayPoetries(); } else alert('Invalid file'); }; reader.readAsText(f); }; inp.click(); }
+        function clearAll(){ if(confirm('⚠️ Erase ALL poems forever? This is irreversible.')){ vault.clearAll(); updateStats(); displayPoetries(); } }
+        function escapeHtml(str){ let div=document.createElement('div'); div.textContent=str; return div.innerHTML; }
+        document.getElementById('poetryModal').addEventListener('click', e=>{ if(e.target===document.getElementById('poetryModal')) closeModal(); });
+    </script>
+</body>
+</html>
